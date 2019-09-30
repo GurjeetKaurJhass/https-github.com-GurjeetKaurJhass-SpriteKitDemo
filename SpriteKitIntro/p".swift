@@ -9,7 +9,7 @@
 import SpriteKit
 import GameplayKit
 class GameScene: SKScene {
-    
+    var pikachu: SKSpriteNode!
     ///setup your scene +sprites
     override func didMove(to view: SKView) {
         print("Hello World")
@@ -33,7 +33,7 @@ class GameScene: SKScene {
         
         //Draw a picture
              //1.Make an image node
-        let pikachu=SKSpriteNode(imageNamed: "pikachu.png")
+        self.pikachu=SKSpriteNode(imageNamed: "pikachu.png")
    
         //2.congigure the image node
         pikachu.position=CGPoint(x: 200, y: 323)
@@ -44,8 +44,28 @@ class GameScene: SKScene {
     
     //Update positiions redraw sprites.
     //Similar to update Positions in androiD
+    var pikachuDirection:String="right"
     override func update(_ currentTime: TimeInterval) {
         //print("\(currentTime):Any thing");
+        
+        
+        //Types of moments
+        // 1.Manual movements(Similar to Android)
+        if (self.pikachuDirection == "right") {
+                    self.pikachu.position.x = self.pikachu.position.x + 1
+                
+                          // Check if pikachu touches the wall
+                     if (self.pikachu.position.x >= size.width) {
+                              self.pikachuDirection = "left"
+                           }
+                  }
+              else if (self.pikachuDirection == "left") {
+                self.pikachu.position.x = self.pikachu.position.x - 1
+                
+                       if (self.pikachu.position.x <= 0) {
+                              self.pikachuDirection = "right"
+            }            }
+        //Manual movement
     }
     
     //Detect user input
