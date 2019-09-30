@@ -10,6 +10,8 @@ import SpriteKit
 import GameplayKit
 class GameScene: SKScene {
     var pikachu: SKSpriteNode!
+    var HighScoreLabel:SKLabelNode!
+    var square:SKSpriteNode!
     ///setup your scene +sprites
     override func didMove(to view: SKView) {
         print("Hello World")
@@ -17,18 +19,18 @@ class GameScene: SKScene {
         //Add some sprites
         //Makre some teXt
         //1.Make label node
-        let highScoreLabel=SKLabelNode(text:"Score:25")
+        self.HighScoreLabel=SKLabelNode(text:"Score:25")
         //2.Configure the node
          //Setting the font size,color,position
-         highScoreLabel.position=CGPoint(x: 100, y: 100)
-         highScoreLabel.fontSize=45;
-         highScoreLabel.fontColor=UIColor.yellow
-         highScoreLabel.fontName="Avenir"
-         addChild(highScoreLabel)
+        self.HighScoreLabel.position=CGPoint(x: 100, y: 100)
+        self.HighScoreLabel.fontSize=45;
+        self.HighScoreLabel.fontColor=UIColor.yellow
+        self.HighScoreLabel.fontName="Avenir"
+         addChild(HighScoreLabel)
         
        //draw a square
-        let square=SKSpriteNode(color: UIColor.yellow, size: CGSize(width: 100, height: 100))
-        square.position=CGPoint(x: 200, y: 500)
+        self.square=SKSpriteNode(color: UIColor.yellow, size: CGSize(width: 100, height: 100))
+        self.square.position=CGPoint(x: 200, y: 500)
         addChild(square)
         
         //Draw a picture
@@ -65,7 +67,15 @@ class GameScene: SKScene {
                        if (self.pikachu.position.x <= 0) {
                               self.pikachuDirection = "right"
             }            }
-        //Manual movement
+        
+        
+        
+        //Automatic movement
+        
+        let upMoveAction=SKAction.moveBy(x: 0, y: 1, duration: 2)
+        let leftMoveAction=SKAction.moveBy(x: -1, y: 0, duration: 2)
+        self.square.run(upMoveAction)
+        self.HighScoreLabel.run(leftMoveAction)
     }
     
     //Detect user input
